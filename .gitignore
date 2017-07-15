@@ -1,0 +1,9 @@
+*.pyc
+*.pyo
+
+.coverage
+kubeconfig.egg-info/
+.cache/
+.eggs/
+build/
+dist/
