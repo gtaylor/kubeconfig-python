@@ -7,3 +7,6 @@ kubeconfig.egg-info/
 .eggs/
 build/
 dist/
+tests/tmp_fixtures/
+
+docs/_build
