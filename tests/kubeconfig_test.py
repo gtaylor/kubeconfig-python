@@ -164,7 +164,7 @@ def test_set_credentials_new():
 
 
 @pytest.mark.usefixtures('prep_fixture_dir')
-def test_set_context_existing():
+def test_set_credentials_existing():
     kc = kubeconfig.KubeConfig(_copy_sample('simple-complete.config'))
     assert kc.view()['users'][0]['user']['auth-provider']['name'] == 'gcp'
     kc.set_credentials('test-user', auth_provider='other')
@@ -172,7 +172,7 @@ def test_set_context_existing():
 
 
 @pytest.mark.usefixtures('prep_fixture_dir')
-def test_set_context_auth_args():
+def test_set_credentials_auth_args():
     kc = kubeconfig.KubeConfig(_copy_sample('simple-complete.config'))
     provider_args = {
         'token-key': 'test',
