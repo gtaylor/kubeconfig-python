@@ -32,7 +32,6 @@ This does make ``kubectl`` a hard dependency for this module, but also ensures
 behavior that is consistent with what you'd expect by using ``kubectl``
 directly.
 
-.. _kubectl: https://kubernetes.io/docs/user-guide/kubectl-overview/
 
 .. toctree::
    :maxdepth: 2
@@ -46,3 +45,16 @@ directly.
    :caption: API Reference:
 
    api
+
+Links
+-----
+
+* `kubeconfig on GitHub`_
+* `Issue tracker`_
+* `Release Notes`_
+* kubectl_
+
+.. _kubeconfig on GitHub: https://github.com/gtaylor/kubeconfig-python
+.. _Issue tracker: https://github.com/gtaylor/kubeconfig-python/issues
+.. _Release Notes: https://github.com/gtaylor/kubeconfig-python/releases
+.. _kubectl: https://kubernetes.io/docs/user-guide/kubectl-overview/
