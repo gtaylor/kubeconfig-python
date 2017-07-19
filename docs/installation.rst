@@ -9,7 +9,7 @@ Prerequesites
     to add or maintain Python 2 compatibility.
 
 * Python 3.5+
-* kubectl_
+* kubectl_ 1.6+
 
 Installation
 ------------
