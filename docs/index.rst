@@ -4,6 +4,15 @@ kubeconfig
 ``kubeconfig`` is a simple Python module for manipulating Kubernetes kubeconfig
 files.
 
+.. code-block:: py
+
+    import kubeconfig
+
+    conf = kubeconfig.KubeConfig()
+    conf.set_context('new-context', cluster='other-cluster', user='my-user')
+    conf.use_context('new-context')
+    print(conf.view())
+
 Example usage cases
 -------------------
 
