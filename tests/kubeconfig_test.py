@@ -118,7 +118,7 @@ def test_rename_context():
 
 
 @pytest.mark.usefixtures('prep_fixture_dir')
-def test_set_context_minimal_invalid_key():
+def test_set_minimal_invalid_key():
     kc = kubeconfig.KubeConfig(_copy_sample('minimal.config'))
     with pytest.raises(kubeconfig.exceptions.KubectlCommandError):
         kc.set('invalid', 'blah')
