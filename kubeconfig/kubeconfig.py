@@ -44,7 +44,7 @@ class KubeConfig(object):
         :rtype: str
         :return: The CLI form of the boolean. IE: 'false', 'true'.
         """
-        if isinstance(bool_arg, bool):
+        if not isinstance(bool_arg, bool):
             raise ValueError("Not a bool: %s", bool_arg)
         return repr(bool_arg).lower()
 
@@ -132,14 +132,14 @@ class KubeConfig(object):
         """
         flags = []
         if certificate_authority is not None:
-            flags += ['--certificate-authority', certificate_authority]
+            flags += ['--certificate-authority=%s' % certificate_authority]
         if embed_certs is not None:
-            flags += ['--embed-certs', self._bool_to_cli_str(embed_certs)]
+            flags += ['--embed-certs=%s' % self._bool_to_cli_str(embed_certs)]
         if insecure_skip_tls_verify is not None:
-            flags += ['--insecure-skip-tls-verify',
+            flags += ['--insecure-skip-tls-verify=%s' %
                       self._bool_to_cli_str(insecure_skip_tls_verify)]
         if server is not None:
-            flags += ['--server', server]
+            flags += ['--server=%s' % server]
         self._run_kubectl_config('set-cluster', name, *flags)
 
     def set_context(self, name, cluster=None, namespace=None, user=None):
@@ -155,11 +155,11 @@ class KubeConfig(object):
         """
         flags = []
         if cluster is not None:
-            flags += ['--cluster', cluster]
+            flags += ['--cluster=%s' % cluster]
         if namespace is not None:
-            flags += ['--namespace', namespace]
+            flags += ['--namespace=%s' % namespace]
         if user is not None:
-            flags += ['--user', user]
+            flags += ['--user=%s' % user]
         self._run_kubectl_config('set-context', name, *flags)
 
     def set_credentials(self, name, auth_provider=None, auth_provider_args=None,
@@ -190,23 +190,23 @@ class KubeConfig(object):
         """
         flags = []
         if auth_provider is not None:
-            flags += ['--auth-provider', auth_provider]
+            flags += ['--auth-provider=%s' % auth_provider]
         if auth_provider_args is not None:
             arg_pairs = ["%s=%s" % (k, v) for k, v in auth_provider_args.items()]
             for arg_pair in arg_pairs:
                 flags += ['--auth-provider-arg=%s' % arg_pair]
         if client_certificate is not None:
-            flags += ['--client-certificate', client_certificate]
+            flags += ['--client-certificate=%s' % client_certificate]
         if client_key is not None:
-            flags += ['--client-key', client_key]
+            flags += ['--client-key=%s' % client_key]
         if embed_certs is not None:
-            flags += ['--embed-certs', self._bool_to_cli_str(embed_certs)]
+            flags += ['--embed-certs=%s' % self._bool_to_cli_str(embed_certs)]
         if password is not None:
-            flags += ['--password', password]
+            flags += ['--password=%s' % password]
         if token is not None:
-            flags += ['--token', token]
+            flags += ['--token=%s' % token]
         if username is not None:
-            flags += ['--username', username]
+            flags += ['--username=%s' % username]
         self._run_kubectl_config('set-credentials', name, *flags)
 
     def unset(self, name):
