@@ -133,6 +133,28 @@ def test_set():
 
 
 #
+# set-cluster tests
+#
+
+
+@pytest.mark.usefixtures('prep_fixture_dir')
+def test_set_cluster_new():
+    kc = kubeconfig.KubeConfig(_copy_sample('minimal.config'))
+    kc.set_cluster('new-cluster')
+    clusters = kc.view()['clusters']
+    assert len(clusters) == 1
+    assert clusters[0]['name'] == 'new-cluster'
+
+
+@pytest.mark.usefixtures('prep_fixture_dir')
+def test_set_cluster_existing():
+    kc = kubeconfig.KubeConfig(_copy_sample('simple-complete.config'))
+    assert kc.view()['clusters'][0]['cluster']['server'] == 'https://192.168.1.100'
+    kc.set_cluster('test-cluster', server='https://yarr')
+    assert kc.view()['clusters'][0]['cluster']['server'] == 'https://yarr'
+
+
+#
 # set-context tests
 #
 
