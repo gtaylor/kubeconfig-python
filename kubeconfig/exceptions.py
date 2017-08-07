@@ -1,5 +1,6 @@
 class KubeConfigError(Exception):
     """Top-level base class for all module exceptions."""
+
     pass
 
 
@@ -12,4 +13,7 @@ class KubectlNotFoundError(KubeConfigError):
 
 class KubectlCommandError(KubeConfigError):
     """Raised when kubectl exit(1)'s or returns an error line."""
-    pass
+
+    def __init__(self, message):
+        self.message = message
+        super().__init__(message)
