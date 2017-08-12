@@ -16,4 +16,7 @@ docs:
 
 clean:
 	rm -rf build/
+	rm -rf dist/
+	rm -rf .cache/
 	rm -rf tests/htmlcov/
+	rm -rf docs/_build
