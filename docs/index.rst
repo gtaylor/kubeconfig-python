@@ -6,9 +6,9 @@ files.
 
 .. code-block:: py
 
-    import kubeconfig
+    from kubeconfig import KubeConfig
 
-    conf = kubeconfig.KubeConfig()
+    conf = KubeConfig()
     conf.set_context('new-context', cluster='other-cluster', user='my-user')
     conf.use_context('new-context')
     print(conf.view())
