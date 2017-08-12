@@ -63,12 +63,12 @@ class KubeConfig(object):
 
     def current_context(self):
         """
-        :raise: :py:exc:`KubectlCommandError <kubeconfig.exceptions.KubectlCommandError>`
-            no context has been set.
-        :rtype: str
-        :return: Your config's currently selected context (``current-context``).
+        :rtype: str or None
+        :return: Your config's currently selected context (``current-context``),
+            or ``None`` if not set.
         """
-        return self._run_kubectl_config('current-context')
+        current_context = self.view().get('current-context')
+        return current_context if current_context else None
 
     def delete_cluster(self, name):
         """

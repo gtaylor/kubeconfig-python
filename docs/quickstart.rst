@@ -89,8 +89,8 @@ done via :py:meth:`KubeConfig.use_context <kubeconfig.KubeConfig.use_context>`:
 
     conf = KubeConfig()
     conf_doc = conf.view()
-    print('Current context:', conf_doc['current-context'])
+    print('Current context:', conf.current_context())
     conf.use_context('new-context')
     # Re-read the config.
     conf_doc = conf.view()
-    print('Current context:', conf_doc['current-context'])
+    print('Current context:', conf.current_context())

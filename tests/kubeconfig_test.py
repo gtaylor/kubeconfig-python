@@ -38,17 +38,15 @@ def test_current_context():
 
 
 def test_current_context_minimal_config():
-    # No context set. Should error out.
+    # No context set. Should be None.
     kc = kubeconfig.KubeConfig(_sample('minimal.config'))
-    with pytest.raises(kubeconfig.exceptions.KubectlCommandError):
-        kc.current_context()
+    assert kc.current_context() is None
 
 
 def test_current_context_empty_config():
     # Non-existing kubeconfig, assumes default.
     kc = kubeconfig.KubeConfig('this-does-not-exist.config')
-    with pytest.raises(kubeconfig.exceptions.KubectlCommandError):
-        kc.current_context()
+    assert kc.current_context() is None
 
 #
 # delete-cluster tests
