@@ -32,6 +32,11 @@ This does make ``kubectl`` a hard dependency for this module, but also ensures
 behavior that is consistent with what you'd expect by using ``kubectl``
 directly.
 
+Getting started
+---------------
+
+For some quick examples of how to use kubeconfig, see :doc:`quickstart`.
+
 
 .. toctree::
    :maxdepth: 2
