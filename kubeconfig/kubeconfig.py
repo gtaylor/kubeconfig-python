@@ -85,7 +85,7 @@ class KubeConfig(object):
         Deletes a context entry from your config.
 
         :param str name: The name of the context to delete from your config.
-        :raise: :py:exc:`KubectlCommandError <kubeconfig.exceptions.KubectlCommandError>` 
+        :raise: :py:exc:`KubectlCommandError <kubeconfig.exceptions.KubectlCommandError>`
             when an invalid context name is specified.
         """
         self._run_kubectl_config('delete-context', name)
@@ -236,4 +236,4 @@ class KubeConfig(object):
             merging has been done.
         """
         conf_doc_str = self._run_kubectl_config('view')
-        return yaml.load(conf_doc_str)
+        return yaml.safe_load(conf_doc_str)
