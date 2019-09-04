@@ -38,7 +38,7 @@ to create or modify credentials:
     from kubeconfig import KubeConfig
 
     conf = KubeConfig()
-    kc.set_credentials(name='my-user, token='super-secret-token')
+    conf.set_credentials(name='my-user, token='super-secret-token')
 
 Creating or modifying a cluster
 -------------------------------
@@ -52,7 +52,7 @@ to create or modify clusters:
     from kubeconfig import KubeConfig
 
     conf = KubeConfig()
-    kc.set_cluster(
+    conf.set_cluster(
         name='my-cluster,
         server='https://my-k8s-api-server.xxx/'
         certificate_authority='/path/to/ca.crt',
@@ -70,7 +70,7 @@ to create or modify contexts:
     from kubeconfig import KubeConfig
 
     conf = KubeConfig()
-    kc.set_context(
+    conf.set_context(
         name='my-context,
         cluster='my-cluster'
         user='my-user',
