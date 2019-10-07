@@ -236,4 +236,4 @@ class KubeConfig(object):
             merging has been done.
         """
         conf_doc_str = self._run_kubectl_config('view')
-        return yaml.load(conf_doc_str)
+        return yaml.load(conf_doc_str, Loader=yaml.FullLoader)
