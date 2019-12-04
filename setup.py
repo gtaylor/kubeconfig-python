@@ -9,7 +9,7 @@ setup(
     author_email='greg@gctaylor.com',
     license='BSD',
     url='http://kubeconfig-python.readthedocs.io',
-    version='1.0.2',
+    version='1.1.0',
     packages=find_packages(),
     install_requires=[
         'PyYAML',
@@ -28,7 +28,9 @@ setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: POSIX :: Linux",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Libraries",
     ],
 )
