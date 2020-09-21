@@ -15,6 +15,7 @@ For example:
     # Check to see our changes.
     print(conf.view())
 """
+import json
 import yaml
 
 
@@ -85,7 +86,7 @@ class KubeConfig(object):
         Deletes a context entry from your config.
 
         :param str name: The name of the context to delete from your config.
-        :raise: :py:exc:`KubectlCommandError <kubeconfig.exceptions.KubectlCommandError>` 
+        :raise: :py:exc:`KubectlCommandError <kubeconfig.exceptions.KubectlCommandError>`
             when an invalid context name is specified.
         """
         self._run_kubectl_config('delete-context', name)
@@ -229,11 +230,24 @@ class KubeConfig(object):
         """
         self._run_kubectl_config('use-context', name)
 
-    def view(self):
+    def view(self, raw=False):
         """
+        :param bool raw: Set to true to return raw certificate data. Defaults
+            to false, where sensitive tokens are returned as REDACTED. Valid
+            only for kubectl versions >= 1.19, where the --raw flag was
+            introduced; output for previous kubectl versions is already raw.
         :rtype: dict
         :return: A dict representing your full kubeconfig file, after all
             merging has been done.
         """
-        conf_doc_str = self._run_kubectl_config('view')
+
+        args = ['view']
+        version = json.loads(
+            self._run(subcmd_args="version -o json --client".split())
+        )
+        should_be_raw = raw and version["major"] >= 1 and version["minor"] >= 19
+
+        if should_be_raw:
+            args.append("--raw")
+        conf_doc_str = self._run_kubectl_config(*args)
         return yaml.safe_load(conf_doc_str)
