@@ -244,7 +244,7 @@ class KubeConfig(object):
         args = ['view']
         version = json.loads(
             self._run(subcmd_args="version -o json --client".split())
-        )
+        )["clientVersion"]
         should_be_raw = raw and version["major"] >= 1 and version["minor"] >= 19
 
         if should_be_raw:
