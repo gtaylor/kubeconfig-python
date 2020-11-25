@@ -9,7 +9,7 @@ setup(
     author_email='greg@gctaylor.com',
     license='BSD',
     url='http://kubeconfig-python.readthedocs.io',
-    version='1.1.1',
+    version='1.1.2',
     packages=find_packages(),
     install_requires=[
         'PyYAML>=5.2',
