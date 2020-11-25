@@ -235,5 +235,5 @@ class KubeConfig(object):
         :return: A dict representing your full kubeconfig file, after all
             merging has been done.
         """
-        conf_doc_str = self._run_kubectl_config('view')
+        conf_doc_str = self._run_kubectl_config('view', '--raw')
         return yaml.safe_load(conf_doc_str)
