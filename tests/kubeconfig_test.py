@@ -63,9 +63,11 @@ def test_delete_cluster_minimal_invalid_name():
 @pytest.mark.usefixtures('prep_fixture_dir')
 def test_delete_cluster():
     kc = kubeconfig.KubeConfig(_copy_sample('simple-complete.config'))
-    assert len(kc.view()['clusters']) == 1
+    assert len(kc.view()['clusters']) == 2
     kc.delete_cluster('test-cluster')
-    assert len(kc.view()['clusters']) == 0
+    assert len(kc.view()['clusters']) == 1
+    kc.delete_cluster('test-cluster-other')
+    assert kc.view()['clusters'] is None
 
 
 #
@@ -83,9 +85,11 @@ def test_delete_context_minimal_invalid_name():
 @pytest.mark.usefixtures('prep_fixture_dir')
 def test_delete_context():
     kc = kubeconfig.KubeConfig(_copy_sample('simple-complete.config'))
-    assert len(kc.view()['contexts']) == 1
+    assert len(kc.view()['contexts']) == 2
     kc.delete_context('test-context')
-    assert len(kc.view()['contexts']) == 0
+    assert len(kc.view()['contexts']) == 1
+    kc.delete_context('test-context-other')
+    assert kc.view()['contexts'] is None
 
 
 #
@@ -103,10 +107,10 @@ def test_rename_context_minimal_invalid_name():
 @pytest.mark.usefixtures('prep_fixture_dir')
 def test_rename_context():
     kc = kubeconfig.KubeConfig(_copy_sample('simple-complete.config'))
-    assert len(kc.view()['contexts']) == 1
+    assert len(kc.view()['contexts']) == 2
     assert kc.view()['contexts'][0]['name'] == 'test-context'
     kc.rename_context('test-context', 'test-context-new')
-    assert len(kc.view()['contexts']) == 1
+    assert len(kc.view()['contexts']) == 2
     assert kc.view()['contexts'][0]['name'] == 'test-context-new'
 
 
