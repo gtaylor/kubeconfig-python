@@ -164,7 +164,8 @@ class KubeConfig(object):
 
     def set_credentials(self, name, auth_provider=None, auth_provider_args=None,
                         client_certificate=None, client_key=None,
-                        embed_certs=None, password=None, token=None,
+                        embed_certs=None, exec_api_version=None, exec_args=None,
+                        exec_command=None, exec_env=None, password=None, token=None,
                         username=None):
         """
         Creates or updates a ``user`` entry under the ``users`` entry.
@@ -184,6 +185,10 @@ class KubeConfig(object):
             setting this to ``True`` will cause the cert to be embedded
             directly in the written config. If ``False`` or unspecified,
             the path to the cert will be used instead.
+        :param str exec_api_version: The K8s auth API_VERSION
+        :param list exec_args: Call arguments for exec-comand
+        :param str exec_command: The external authentication executable
+        :param str exec_env: Environment variables used for exec-command
         :param str username: Your username (if using basic auth).
         :param str password: Your user's password (if using basic auth).
         :param str token: Your private token (if using token auth).
@@ -201,6 +206,16 @@ class KubeConfig(object):
             flags += ['--client-key=%s' % client_key]
         if embed_certs is not None:
             flags += ['--embed-certs=%s' % self._bool_to_cli_str(embed_certs)]
+        if exec_api_version is not None:
+            flags += ['--exec-api-version=%s' % exec_api_version]
+        if exec_args is not None:
+            flags += ['--exec-arg=%s' % ','.join(exec_args)]
+        if exec_command is not None:
+            flags += ['--exec-command=%s' % exec_command]
+        if exec_env is not None:
+            arg_pairs = ["%s=%s" % (k, v) for k, v in exec_env.items()]
+            for arg_pair in arg_pairs:
+                flags += ['--exec-env=%s' % arg_pair]
         if password is not None:
             flags += ['--password=%s' % password]
         if token is not None:
